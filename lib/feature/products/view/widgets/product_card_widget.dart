@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:machine_test/feature/products/model/product_model.dart';
@@ -13,18 +15,30 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const discountPercentage = 0.1;
+
+    final Imageurls = [
+      "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309641.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/top-view-virtual-reality-headset-white-headphones_23-2148912739.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309628.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/top-view-virtual-reality-simulator-with-laptop_23-2148912818.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/workplace-business-modern-male-accessories-laptop-black-background_155003-3944.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
+    ];
+
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       shrinkWrap: true,
       itemCount: products.length,
       separatorBuilder: (context, index) => const SizedBox(width: 16),
       itemBuilder: (context, index) {
+        String randomImageUrl = Imageurls[Random().nextInt(Imageurls.length)];
+
         return InkWell(
           onTap: () {
             Get.to(() => ProductDescriptionPage(
                   product: products[index],
-                  imageUrl:
-                      "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+                  imageUrl: randomImageUrl,
+                  discount: discountPercentage * 100,
                 ));
           },
           borderRadius: BorderRadius.circular(8),
@@ -42,7 +56,7 @@ class ProductCardWidget extends StatelessWidget {
                   child: SizedBox(
                     width: 100,
                     child: Image.network(
-                      "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+                      randomImageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
