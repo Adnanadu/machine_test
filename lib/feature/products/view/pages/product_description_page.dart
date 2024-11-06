@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProductDescriptionPage extends StatelessWidget {
   const ProductDescriptionPage({super.key});
@@ -7,64 +6,86 @@ class ProductDescriptionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            //acts Like appbar
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // leading Icon
-                InkWell(
-                  onTap: () {
-                    //
-                  },
-                  child: SvgPicture.asset(
-                    "assets/logo/leading.svg",
-                    height: 44,
-                    width: 44,
-                  ),
-                ),
-
-                //center Store Location indicates here
-                InkWell(
-                  onTap: () {},
-                  child: const Column(
-                    children: [
-                      Text(
-                        "Store Location",
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                      Row(children: [
-                        // SvgPicture.asset(
-                        //   "assets/logo/loaction.svg",
-                        //   height: 14,
-                        //   width: 14,
-                        // ),
+        backgroundColor: const Color(0x00ff1321),
+        body: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 8,
+              ),
+              const SizedBox(
+                height: 300,
+                child: Placeholder(),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Column(
+                  children: [
+                    Row(
+                      children: [
                         Text(
-                          "ABC Street, New York",
+                          "Item Name",
+                          style: TextStyle(color: Colors.white, fontSize: 28),
                         ),
-                      ]),
-                    ],
-                  ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          r"$Item Price",
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      '''Product Description xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx''',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                  ],
                 ),
-
-                //action icon ( cart incates here)
-                InkWell(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    "assets/logo/action_cart.svg",
-                    height: 44,
-                    width: 44,
-                  ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Column(
+                      children: [
+                        Text("Price",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20)),
+                        Text(
+                          r"$Price",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.blue,
+                          minimumSize: const Size(0, 56),
+                        ),
+                        onPressed: () {},
+                        child: const Text("Add to Cart"))
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const Hero(
-              tag: "productDescription", child: Image(image: NetworkImage(""))),
-        ],
-      ),
-    );
+        ));
   }
 }
