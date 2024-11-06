@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:machine_test/feature/products/controller/product_controller.dart';
 import 'package:machine_test/feature/products/view/pages/product_description_page.dart';
 import 'package:get/get.dart';
+import 'package:machine_test/feature/products/view/widgets/product_card_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -151,32 +152,9 @@ class HomePage extends StatelessWidget {
                   );
                 }
 
-                final products = productController.productList.value;
-
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          //routing to product Details
-                        },
-                        child: SizedBox(
-                          width: 100,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Expanded(child: Placeholder()),
-                              Text(products[index].name!)
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                return const SizedBox(
+                  height: 240,
+                  child: ProductCardWidget(),
                 );
               }),
               const SizedBox(
@@ -205,9 +183,15 @@ class HomePage extends StatelessWidget {
                       onTap: () => MaterialPageRoute(
                         builder: (context) => const ProductDescriptionPage(),
                       ),
-                      child: const AspectRatio(
-                        aspectRatio: 9 / 16,
-                        child: Placeholder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 100,
+                          child: Image.network(
+                            "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     );
                   },
