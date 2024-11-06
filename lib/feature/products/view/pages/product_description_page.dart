@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test/feature/products/model/product_model.dart';
 
 class ProductDescriptionPage extends StatelessWidget {
-  const ProductDescriptionPage({super.key});
+  final ProductModel product;
+  final String imageUrl;
+
+  const ProductDescriptionPage({
+    super.key,
+    required this.product,
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +18,7 @@ class ProductDescriptionPage extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              const SizedBox(
-                height: 8,
-              ),
+              const SizedBox(height: 8),
               const SizedBox(
                 height: 300,
                 child: Placeholder(),

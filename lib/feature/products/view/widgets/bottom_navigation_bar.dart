@@ -42,7 +42,7 @@
 //                           Image(
 //                             height: 24, // Adjust this as needed
 //                             width: 24,
-//                             image: SvgPicture.asset(tabIndex.value == 0"assets/logo/home.svg"),
+//                             image: SvgPicture.asset(tabIndex.value == 0"assets/icons/home.svg"),
 //                             color: Colors.deepPurpleAccent,
 //                             colorBlendMode: BlendMode.srcIn,
 //                           ),
