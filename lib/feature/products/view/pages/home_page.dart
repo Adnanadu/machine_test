@@ -75,149 +75,162 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 8),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 16),
 
-              //search bar
-              const SearchBar(
-                hintText: "Search",
-                backgroundColor: WidgetStatePropertyAll(Color(0xff161F28)),
-                shadowColor: WidgetStatePropertyAll(Colors.transparent),
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Icon(
-                    Icons.search,
-                    color: Color.fromARGB(255, 120, 120, 120),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              SizedBox(
-                height: 50,
-                child: Obx(
-                  () {
-                    final selectedIndex =
-                        categoryController.selectedIndex.value;
+                      //search bar
+                      const SearchBar(
+                        hintText: "Search",
+                        backgroundColor:
+                            WidgetStatePropertyAll(Color(0xff161F28)),
+                        shadowColor: WidgetStatePropertyAll(Colors.transparent),
+                        leading: Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Icon(
+                            Icons.search,
+                            color: Color.fromARGB(255, 120, 120, 120),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        child: Obx(() {
+                          final selectedIndex =
+                              categoryController.selectedIndex.value;
 
-                    return ListView.separated(
-                        itemCount: categoryController.categoryNames.length,
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: 16),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final isSelected = selectedIndex == index;
+                          return ListView.separated(
+                              itemCount:
+                                  categoryController.categoryNames.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(width: 16),
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                final isSelected = selectedIndex == index;
 
-                          return GestureDetector(
-                            onTap: () =>
-                                categoryController.selectedIndex.value = index,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 6),
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? const Color(0xff5B9EE1)
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(12),
+                                return GestureDetector(
+                                  onTap: () => categoryController
+                                      .selectedIndex.value = index,
+                                  child: Container(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 6),
                                     decoration: BoxDecoration(
                                       color: isSelected
-                                          ? Colors.white
-                                          : const Color(0xff161F28),
-                                      shape: BoxShape.circle,
+                                          ? const Color(0xff5B9EE1)
+                                          : Colors.transparent,
+                                      borderRadius: BorderRadius.circular(100),
                                     ),
-                                    child: SvgPicture.asset(
-                                      categoryController.categoryImages[index],
-                                      height: 18,
-                                      colorFilter: ColorFilter.mode(
-                                          isSelected
-                                              ? const Color(0xff1A2530)
-                                              : Colors.white,
-                                          BlendMode.srcIn),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                            color: isSelected
+                                                ? Colors.white
+                                                : const Color(0xff161F28),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: SvgPicture.asset(
+                                            categoryController
+                                                .categoryImages[index],
+                                            height: 18,
+                                            colorFilter: ColorFilter.mode(
+                                                isSelected
+                                                    ? const Color(0xff1A2530)
+                                                    : Colors.white,
+                                                BlendMode.srcIn),
+                                          ),
+                                        ),
+                                        if (isSelected)
+                                          Text(
+                                            categoryController
+                                                .categoryNames[index],
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        if (isSelected)
+                                          const SizedBox(width: 12),
+                                      ],
                                     ),
                                   ),
-                                  if (isSelected)
-                                    Text(
-                                      categoryController.categoryNames[index],
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  if (isSelected) const SizedBox(width: 12),
-                                ],
-                              ),
-                            ),
+                                );
+                              });
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      const Text(
+                        "New Arrivals",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      Obx(() {
+                        if (productController.error.value.isNotEmpty) {
+                          return Center(
+                            child: Text(productController.error.value),
                           );
-                        });
-                  },
+                        }
+
+                        if (productController.isLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return SizedBox(
+                          height: 200,
+                          child: ProductCardWidget(
+                            products: productController.productList,
+                          ),
+                        );
+                      }),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      const Text(
+                        "Trending Products",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      Obx(() {
+                        if (productController.error.value.isNotEmpty) {
+                          return Center(
+                            child: Text(productController.error.value),
+                          );
+                        }
+
+                        if (productController.isLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return SizedBox(
+                          height: 200,
+                          child: ProductCardWidget(
+                            products: productController.productList,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
-              const Text(
-                "New Arrivals",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Obx(() {
-                if (productController.error.value.isNotEmpty) {
-                  return Center(
-                    child: Text(productController.error.value),
-                  );
-                }
-
-                if (productController.isLoading.value) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                return SizedBox(
-                  height: 200,
-                  child: ProductCardWidget(
-                    products: productController.productList,
-                  ),
-                );
-              }),
-              const SizedBox(
-                height: 24,
-              ),
-              const Text(
-                "Trending Products",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Obx(() {
-                if (productController.error.value.isNotEmpty) {
-                  return Center(
-                    child: Text(productController.error.value),
-                  );
-                }
-
-                if (productController.isLoading.value) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                return SizedBox(
-                  height: 200,
-                  child: ProductCardWidget(
-                    products: productController.productList,
-                  ),
-                );
-              }),
             ],
           ),
         ),

@@ -17,7 +17,7 @@ class ProductCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const discountPercentage = 0.1;
 
-    final Imageurls = [
+    final imageUrls = [
       "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309641.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
       "https://img.freepik.com/free-photo/top-view-virtual-reality-headset-white-headphones_23-2148912739.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
       "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309628.jpg?ga=GA1.1.1061239647.1726655277&semt=ais_hybrid",
@@ -31,7 +31,7 @@ class ProductCardWidget extends StatelessWidget {
       itemCount: products.length,
       separatorBuilder: (context, index) => const SizedBox(width: 16),
       itemBuilder: (context, index) {
-        String randomImageUrl = Imageurls[Random().nextInt(Imageurls.length)];
+        String randomImageUrl = imageUrls[Random().nextInt(imageUrls.length)];
 
         return InkWell(
           onTap: () {
