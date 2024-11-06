@@ -19,9 +19,23 @@ class ProductDescriptionPage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 8),
-              const SizedBox(
+              SizedBox(
                 height: 300,
-                child: Placeholder(),
+                child: Stack(
+                  children: [
+                    Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Color(0xff161F28),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 16,
