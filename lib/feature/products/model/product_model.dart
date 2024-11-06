@@ -1,10 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:machine_test/feature/products/model/review_model.dart';
 
 part 'product_model.freezed.dart';
+part 'product_model.g.dart';
 
 @freezed
 class ProductModel with _$ProductModel {
-  const factory ProductModel({
+  @JsonSerializable(explicitToJson: true)
+  factory ProductModel({
     @JsonKey(name: "product_id") int? productId,
     @JsonKey(name: "name") String? name,
     @JsonKey(name: "description") String? description,
@@ -16,17 +19,9 @@ class ProductModel with _$ProductModel {
     @JsonKey(name: "brand") String? brand,
     @JsonKey(name: "category") String? category,
     @JsonKey(name: "rating") double? rating,
-    @JsonKey(name: "reviews") List<Review>? reviews,
+    @JsonKey(name: "reviews") List<ReviewModel>? reviews,
   }) = _ProductModel;
 
-  static fromJson(json) {}
-}
-
-@freezed
-class Review with _$Review {
-  const factory Review({
-    @JsonKey(name: "user_id") int? userId,
-    @JsonKey(name: "rating") int? rating,
-    @JsonKey(name: "comment") String? comment,
-  }) = _Review;
+  factory ProductModel.fromJson(Map<String, Object?> json) =>
+      _$ProductModelFromJson(json);
 }

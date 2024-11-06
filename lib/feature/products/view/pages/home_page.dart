@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:machine_test/feature/HomePage/view/pages/product_description_page.dart';
-import 'package:machine_test/feature/HomePage/view/widgets/bottom_navigation_bar.dart';
-// import 'package:machine_test/feature/HomePage/services/api_integration/api_integration.dart';
-// import 'package:machine_test/feature/HomePage/view/model/product_model.dart';
+import 'package:machine_test/feature/products/view/pages/product_description_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
